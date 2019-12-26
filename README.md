@@ -7,7 +7,7 @@
 
 ## Progressive LiDAR Adaptation for Road Detection Implemented in PyTorch
 
-This repository reproduces the results of PLARD in PyTorch. The code is heavily based on [pytorch-semseg](https://github.com/meetshah1995/pytorch-semseg).
+This repository reproduces the results of PLARD [PDF](https://arxiv.org/abs/1904.01206) in PyTorch. The code is heavily based on [pytorch-semseg](https://github.com/meetshah1995/pytorch-semseg).
 
 
 <p align="center">
@@ -24,12 +24,12 @@ Please follow instructions on [pytorch-semseg](https://github.com/meetshah1995/p
 
 ### Data ###
 
-
 A trained model of PLARD will be available soon. 
 
 ### Setup
 
 ** Setup Dataset **
+
 Please setup dataset according to the following folder structure:
 ```
 PLARD
@@ -37,26 +37,29 @@ PLARD
  |---- imgs
  |---- outputs
  |---- dataset
-      |---- training
-           |---- image_2
-           |---- ADI
-      |---- testing
-           |---- image_2
-           |---- ADI 
+ |    |---- training
+ |    |    |---- image_2
+ |    |    |---- ADI
+ |    |---- testing
+ |    |    |---- image_2
+ |    |    |---- ADI 
 ```
 The "image\_2" folders contain the visual images which can be downloaded from the [KITTI](http://www.cvlibs.net/datasets/kitti/eval_road.php).
+
 The "ADI" folders contain the altitude difference images which will be available soon. 
 
 ### Usage
 ** Test **
+
 Run the test set on KITTI Road dataset using the following command:
 ```
 python test.py --model_path /path/to/plard_kitti_road.pth
 ```
-Then the results in perspective view will be written under "./outputs/results". Follow the guidelines of KITTI to perform evaluation. 
+The results in perspective view will be written under "./outputs/results". Follow the guidelines of KITTI to perform evaluation. 
 
 ** Train **
-Training is similar to the [pytorch-semseg](https://github.com/meetshah1995/pytorch-semseg) to perform training.
+
+Training script is similar to the [pytorch-semseg](https://github.com/meetshah1995/pytorch-semseg).
 
 ### Reference
 **If you find this code useful in your research, please consider citing:**
