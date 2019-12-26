@@ -49,7 +49,7 @@ The "image\_2" folders contain the visual images which can be downloaded from th
 The "ADI" folders contain the altitude difference images which will be available soon. 
 
 ### Usage
-** Test **
+**Test**
 
 Run the test set on KITTI Road dataset using the following command:
 ```
@@ -57,7 +57,7 @@ python test.py --model_path /path/to/plard_kitti_road.pth
 ```
 The results in perspective view will be written under "./outputs/results". Follow the guidelines of KITTI to perform evaluation. 
 
-** Train **
+**Train**
 
 Training script is similar to the [pytorch-semseg](https://github.com/meetshah1995/pytorch-semseg).
 
