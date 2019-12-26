@@ -22,10 +22,6 @@ Despite rapid developments in visual image-based road detection, robustly identi
 ### Installation ###
 Please follow instructions on [pytorch-semseg](https://github.com/meetshah1995/pytorch-semseg).
 
-### Data ###
-
-A trained model of PLARD will be available soon. 
-
 ### Setup
 
 **Setup Dataset**
@@ -46,7 +42,7 @@ PLARD
 ```
 The "image\_2" folders contain the visual images which can be downloaded from the [KITTI](http://www.cvlibs.net/datasets/kitti/eval_road.php).
 
-The "ADI" folders contain the altitude difference images which will be available soon. 
+The "ADI" folders contain the altitude difference images which will be downloaded [here](https://www.dropbox.com/s/wks807hv84wcduv/ADI-training.zip?dl=0) for training set and [here](https://www.dropbox.com/s/sslqw2flp7ptwnj/ADI-testing.zip?dl=0) for testing set. 
 
 ### Usage
 **Test**
@@ -56,6 +52,8 @@ Run the test set on KITTI Road dataset using the following command:
 python test.py --model_path /path/to/plard_kitti_road.pth
 ```
 The results in perspective view will be written under "./outputs/results". Follow the guidelines of KITTI to perform evaluation. 
+
+A trained model of PLARD can be downloaded [here](https://www.dropbox.com/s/lrtwhuo0rxv1sgy/plard_kitti_road.pth?dl=0). 
 
 **Train**
 
