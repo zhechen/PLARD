@@ -74,13 +74,4 @@ Training script is similar to the [pytorch-semseg](https://github.com/meetshah19
   publisher={IEEE}
 }
 ```
-or
-```
-@article{chen2019progressive,
-  title={Progressive LiDAR Adaptation for Road Detection},
-  author={Chen, Zhe and Zhang, Jing and Tao, Dacheng},
-  journal={arXiv preprint arXiv:1904.01206},
-  year={2019}
-}
-```
 
