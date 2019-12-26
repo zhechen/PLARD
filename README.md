@@ -7,11 +7,11 @@
 
 ## Progressive LiDAR Adaptation for Road Detection Implemented in PyTorch
 
-This repository reproduces results of PLARD in PyTorch. The code is heavily based on [pytorch-semseg](https://github.com/meetshah1995/pytorch-semseg).
+This repository reproduces the results of PLARD in PyTorch. The code is heavily based on [pytorch-semseg](https://github.com/meetshah1995/pytorch-semseg).
 
 
 <p align="center">
-<img src="imgs/main.png" width="80%"/>
+<img src="imgs/main.png" width="95%"/>
 </p>
 
 ### Abstract
@@ -19,108 +19,67 @@ This repository reproduces results of PLARD in PyTorch. The code is heavily base
 Despite rapid developments in visual image-based road detection, robustly identifying road areas in visual images remains challenging due to issues like illumination changes and blurry images. To this end, LiDAR sensor data can be incorporated to improve the visual image-based road detection, because LiDAR data is less susceptible to visual noises. However, the main difficulty in introducing LiDAR information into visual image-based road detection is that LiDAR data and its extracted features do not share the same space with the visual data and visual features. Such gaps in spaces may limit the benefits of LiDAR information for road detection. To overcome this issue, we introduce a novel Progressive LiDAR Adaptation-aided Road Detection (PLARD) approach to adapt LiDAR information into visual image-based road detection and improve detection performance. In PLARD, progressive LiDAR adaptation consists of two subsequent modules: 1) data space adaptation, which transforms the LiDAR data to the visual data space to align with the perspective view by applying altitude difference-based transformation; and 2) feature space adaptation, which adapts LiDAR features to visual features through a cascaded fusion structure. Comprehensive empirical studies on the well-known KITTI road detection benchmark demonstrate that PLARD takes advantage of both the visual and LiDAR information, achieving much more robust road detection even in challenging urban scenes. In particular, PLARD outperforms other state-of-the-art road detection models and is currently top of the publicly accessible benchmark leader-board.
 
 
-## Usage
+### Installation ###
+Please follow instructions on [pytorch-semseg](https://github.com/meetshah1995/pytorch-semseg).
+
+### Data ###
+
+
+A trained model of PLARD will be available soon. 
 
 ### Setup
 
-
+** Setup Dataset **
+Please setup dataset according to the following folder structure:
+```
+PLARD
+ |---- ptsemseg
+ |---- imgs
+ |---- outputs
+ |---- dataset
+      |---- training
+           |---- image_2
+           |---- ADI
+      |---- testing
+           |---- image_2
+           |---- ADI 
+```
+The "image\_2" folders contain the visual images which can be downloaded from the [KITTI](http://www.cvlibs.net/datasets/kitti/eval_road.php).
+The "ADI" folders contain the altitude difference images which will be available soon. 
 
 ### Usage
-
-**Setup config file**
-
-```yaml
-# Model Configuration
-model:
-    arch: <name> [options: 'fcn[8,16,32]s, unet, segnet, pspnet, icnet, icnetBN, linknet, frrn[A,B]'
-    <model_keyarg_1>:<value>
-
-# Data Configuration
-data:
-    dataset: <name> [options: 'pascal, camvid, ade20k, mit_sceneparsing_benchmark, cityscapes, nyuv2, sunrgbd, vistas'] 
-    train_split: <split_to_train_on>
-    val_split: <spit_to_validate_on>
-    img_rows: 512
-    img_cols: 1024
-    path: <path/to/data>
-    <dataset_keyarg1>:<value>
-
-# Training Configuration
-training:
-    n_workers: 64
-    train_iters: 35000
-    batch_size: 16
-    val_interval: 500
-    print_interval: 25
-    loss:
-        name: <loss_type> [options: 'cross_entropy, bootstrapped_cross_entropy, multi_scale_crossentropy']
-        <loss_keyarg1>:<value>
-
-    # Optmizer Configuration
-    optimizer:
-        name: <optimizer_name> [options: 'sgd, adam, adamax, asgd, adadelta, adagrad, rmsprop']
-        lr: 1.0e-3
-        <optimizer_keyarg1>:<value>
-
-        # Warmup LR Configuration
-        warmup_iters: <iters for lr warmup>
-        mode: <'constant' or 'linear' for warmup'>
-        gamma: <gamma for warm up>
-       
-    # Augmentations Configuration
-    augmentations:
-        gamma: x                                     #[gamma varied in 1 to 1+x]
-        hue: x                                       #[hue varied in -x to x]
-        brightness: x                                #[brightness varied in 1-x to 1+x]
-        saturation: x                                #[saturation varied in 1-x to 1+x]
-        contrast: x                                  #[contrast varied in 1-x to 1+x]
-        rcrop: [h, w]                                #[crop of size (h,w)]
-        translate: [dh, dw]                          #[reflective translation by (dh, dw)]
-        rotate: d                                    #[rotate -d to d degrees]
-        scale: [h,w]                                 #[scale to size (h,w)]
-        ccrop: [h,w]                                 #[center crop of (h,w)]
-        hflip: p                                     #[flip horizontally with chance p]
-        vflip: p                                     #[flip vertically with chance p]
-
-    # LR Schedule Configuration
-    lr_schedule:
-        name: <schedule_type> [options: 'constant_lr, poly_lr, multi_step, cosine_annealing, exp_lr']
-        <scheduler_keyarg1>:<value>
-
-    # Resume from checkpoint  
-    resume: <path_to_checkpoint>
+** Test **
+Run the test set on KITTI Road dataset using the following command:
 ```
-
-**To train the model :**
-
+python test.py --model_path /path/to/plard_kitti_road.pth
 ```
-python train.py [-h] [--config [CONFIG]] 
+Then the results in perspective view will be written under "./outputs/results". Follow the guidelines of KITTI to perform evaluation. 
 
---config                Configuration file to use
-```
+** Train **
+Training is similar to the [pytorch-semseg](https://github.com/meetshah1995/pytorch-semseg) to perform training.
 
-**To validate the model :**
-
-```
-usage: validate.py [-h] [--config [CONFIG]] [--model_path [MODEL_PATH]]
-                       [--eval_flip] [--measure_time]
-
-  --config              Config file to be used
-  --model_path          Path to the saved model
-  --eval_flip           Enable evaluation with flipped image | True by default
-  --measure_time        Enable evaluation with time (fps) measurement | True
-                        by default
-```
-
-
+### Reference
 **If you find this code useful in your research, please consider citing:**
 
 ```
-@article{mshahsemseg,
-    Author = {Meet P Shah},
-    Title = {Semantic Segmentation Architectures Implemented in PyTorch.},
-    Journal = {https://github.com/meetshah1995/pytorch-semseg},
-    Year = {2017}
+@article{chen2019progressive,
+  title={Progressive LiDAR adaptation for road detection},
+  author={Chen, Zhe and Zhang, Jing and Tao, Dacheng},
+  journal={IEEE/CAA Journal of Automatica Sinica},
+  volume={6},
+  number={3},
+  pages={693--702},
+  year={2019},
+  publisher={IEEE}
+}
+```
+or
+```
+@article{chen2019progressive,
+  title={Progressive LiDAR Adaptation for Road Detection},
+  author={Chen, Zhe and Zhang, Jing and Tao, Dacheng},
+  journal={arXiv preprint arXiv:1904.01206},
+  year={2019}
 }
 ```
 
