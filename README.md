@@ -28,7 +28,7 @@ A trained model of PLARD will be available soon.
 
 ### Setup
 
-** Setup Dataset **
+**Setup Dataset**
 
 Please setup dataset according to the following folder structure:
 ```
