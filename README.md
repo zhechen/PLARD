@@ -18,6 +18,17 @@ This repository reproduces the results of PLARD [PDF](https://arxiv.org/abs/1904
 
 Despite rapid developments in visual image-based road detection, robustly identifying road areas in visual images remains challenging due to issues like illumination changes and blurry images. To this end, LiDAR sensor data can be incorporated to improve the visual image-based road detection, because LiDAR data is less susceptible to visual noises. However, the main difficulty in introducing LiDAR information into visual image-based road detection is that LiDAR data and its extracted features do not share the same space with the visual data and visual features. Such gaps in spaces may limit the benefits of LiDAR information for road detection. To overcome this issue, we introduce a novel Progressive LiDAR Adaptation-aided Road Detection (PLARD) approach to adapt LiDAR information into visual image-based road detection and improve detection performance. In PLARD, progressive LiDAR adaptation consists of two subsequent modules: 1) data space adaptation, which transforms the LiDAR data to the visual data space to align with the perspective view by applying altitude difference-based transformation; and 2) feature space adaptation, which adapts LiDAR features to visual features through a cascaded fusion structure. Comprehensive empirical studies on the well-known KITTI road detection benchmark demonstrate that PLARD takes advantage of both the visual and LiDAR information, achieving much more robust road detection even in challenging urban scenes. In particular, PLARD outperforms other state-of-the-art road detection models and is currently top of the publicly accessible benchmark leader-board.
 
+### 22/02 Update ###
+
+1) I have double-checked my released model on my own environment: on the KITTI dataset, I have got maxF scores, **96.32/97.47/96.13/96.79**, for **UM/UMM/UU/URBAN**, respectively. This is similar to the reported ones in the paper. Note that the released model is trained independently from the model that produces the reported scores, thus there are some slight differences in the results. Also note that the released model does not produce lane detection results. 
+
+2) The BEV-results I have obtained from my released model can be found [here](https://www.dropbox.com/s/e2tpn8s7jy05t43/plard.zip?dl=0). 
+
+3) Since this project is developed based on an early version of [pytorch-semseg](https://github.com/meetshah1995/pytorch-semseg) and an old system, I am not sure what kinds of problems will appear in other environments. If you have code modification suggestions, please commit a pull request. 
+
+4) I am sorry that the very original scripts for computing altitude difference images are lost. Please wait for my further update on this.
+
+P.S. I am not updating this repository very frequently, so please forgive my late response in the future. 
 
 ### Installation ###
 Please follow instructions on [pytorch-semseg](https://github.com/meetshah1995/pytorch-semseg).
