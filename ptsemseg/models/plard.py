@@ -360,3 +360,8 @@ class plard(nn.Module):
         else: # eval mode
             return F.softmax(x, dim=1)
 
+    def freeze_bn(self):
+        for m in self.modules():
+            if isinstance(m, nn.BatchNorm2d):
+                m.eval()
+
