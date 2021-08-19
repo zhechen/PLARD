@@ -82,8 +82,8 @@ def train(args, logger):
     for epoch in range(args.n_epoch):
         adjust_learning_rate(optimizer, epoch, args.l_rate, args.l_rate_decay, args.l_rate_step)
         model.train()
-        if args.pretrained is not None:
-            model.module.freeze_bn()
+        #if args.pretrained is not None:
+        model.module.freeze_bn()
 
         avg_loss = 0.
         for i, (images, lidars, labels) in enumerate(trainloader):

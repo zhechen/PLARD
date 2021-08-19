@@ -30,6 +30,11 @@ Despite rapid developments in visual image-based road detection, robustly identi
 
 P.S. I am not updating this repository very frequently, so please forgive my late response in the future. 
 
+### 19/08/2021 Update ###
+1) I strongly recommend using our pre-trained model to initialize the network before training on any other tasks, even without LiDAR images.
+
+2) For proper training with small batches, I tried to fix the batch normalization layers by default in codes.
+
 ### 23/07/2020 Update ###
 Finally, I have got some time to re-implement the code for computing altitude difference image. The codes are written in MATLAB and are placed under the folder './codes-for-ADI'. Note that we re-tune the parameters for the new implementation, thus some parameters are different from the original implementation. This does not affect performance in practice.
 
