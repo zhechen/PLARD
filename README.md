@@ -18,6 +18,11 @@ This repository reproduces the results of PLARD [PDF](https://arxiv.org/abs/1904
 
 Despite rapid developments in visual image-based road detection, robustly identifying road areas in visual images remains challenging due to issues like illumination changes and blurry images. To this end, LiDAR sensor data can be incorporated to improve the visual image-based road detection, because LiDAR data is less susceptible to visual noises. However, the main difficulty in introducing LiDAR information into visual image-based road detection is that LiDAR data and its extracted features do not share the same space with the visual data and visual features. Such gaps in spaces may limit the benefits of LiDAR information for road detection. To overcome this issue, we introduce a novel Progressive LiDAR Adaptation-aided Road Detection (PLARD) approach to adapt LiDAR information into visual image-based road detection and improve detection performance. In PLARD, progressive LiDAR adaptation consists of two subsequent modules: 1) data space adaptation, which transforms the LiDAR data to the visual data space to align with the perspective view by applying altitude difference-based transformation; and 2) feature space adaptation, which adapts LiDAR features to visual features through a cascaded fusion structure. Comprehensive empirical studies on the well-known KITTI road detection benchmark demonstrate that PLARD takes advantage of both the visual and LiDAR information, achieving much more robust road detection even in challenging urban scenes. In particular, PLARD outperforms other state-of-the-art road detection models and is currently top of the publicly accessible benchmark leader-board.
 
+### 19/08/2021 Update ###
+1) I strongly recommend using our pre-trained model to initialize the network before training on any other tasks, even without LiDAR images.
+
+2) For proper training with small batches, I tried to fix the batch normalization layers by default in codes.
+
 ### 22/02/2020 Update ###
 
 1) I have double-checked my released model on my own environment: on the KITTI dataset, I have got maxF scores, **96.32/97.47/96.13/96.79**, for **UM/UMM/UU/URBAN**, respectively. This is similar to the reported ones in the paper. Note that the released model is trained independently from the model that produces the reported scores, thus there are some slight differences in the results. Also note that the released model does not produce lane detection results. 
@@ -29,11 +34,6 @@ Despite rapid developments in visual image-based road detection, robustly identi
 4) I am sorry that the very original scripts for computing altitude difference images are lost. Please wait for my further update on this.
 
 P.S. I am not updating this repository very frequently, so please forgive my late response in the future. 
-
-### 19/08/2021 Update ###
-1) I strongly recommend using our pre-trained model to initialize the network before training on any other tasks, even without LiDAR images.
-
-2) For proper training with small batches, I tried to fix the batch normalization layers by default in codes.
 
 ### 23/07/2020 Update ###
 Finally, I have got some time to re-implement the code for computing altitude difference image. The codes are written in MATLAB and are placed under the folder './codes-for-ADI'. Note that we re-tune the parameters for the new implementation, thus some parameters are different from the original implementation. This does not affect performance in practice.
